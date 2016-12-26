@@ -1,55 +1,23 @@
 #!/usr/bin/python
-
-import sys, os
-import ads as ads
-
-names_file = open(sys.argv[1])
+#Basically a grep on the abstract directory
+import os, sys
+import re
 
 #Default abstract storage
-abstract_directory = "abstracts"
-if len(sys.argv) > 2:
-	abstract_directory = sys.argv[2]
+abstract_directory = sys.argv[1]
 
-if not os.path.exists(abstract_directory):
-	os.makedirs(abstract_directory)
+#All search keywords (these can be regex!)
+keywords = list(sys.argv[2:])
 
-number_abstracts = 4
-if len(sys.argv) > 3:
-	number_abstracts = int(sys.argv[3])
-
-author_num = 0
-for line in names_file:
-	#Only names
-	if line[0]==',': continue
-	if len(line) < 4: continue
-
-	print "Author", author_num
-
-
-	cut_point = 0
-	#Find last space
-	for x in reversed(range(len(line))):
-		if line[x] == ' ':
-			cut_point = x
-			break
-	first_name = line[:x]
-	last_name = line[x+1:]
-	last_name = ''.join([char for char in last_name if char.isalpha()])
-	papers = ads.SearchQuery(
-		author=last_name+", "+first_name,
-		sort='date',
-		fl=['abstract'])
-
-	abstract_file = open(abstract_directory+"/"+\
-		last_name+"_"+first_name+".txt",'w')
-	j = 0
-	for paper in papers:
-		abstract_file.write("Abstract "+str(j)+"\n")
-		try:
-			abstract_file.write(paper.abstract.encode('utf-8'))
-		except AttributeError:
-			pass
-		abstract_file.write("\n")
-		j += 1
-		if j > number_abstracts: break
-	author_num+=1
+for dirname, subdirlist, filelist in os.walk(abstract_directory):
+	for fname in filelist:
+		abs_file = open(abstract_directory+"/"+\
+				fname, 'r')
+		abs_text = abs_file.read()
+		for key in keywords:
+			if not re.search(key, 
+				abs_text,
+				re.IGNORECASE):
+				break
+		else:
+			print fname[:-4]
