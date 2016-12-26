@@ -3,6 +3,7 @@ start_url="http://adsabs.harvard.edu/cgi-bin/nph-abs_connect?db_key=AST&db_key=P
 end_url="&object=&start_mon=&start_year=&end_mon=&end_year=&ttl_logic=OR&title=&txt_logic=OR&text=&nr_to_return=10&start_nr=1&jou_pick=ALL&ref_stems=&data_and=NO&abstract=YES&group_and=ALL&start_entry_day=&start_entry_mon=&start_entry_year=&end_entry_day=&end_entry_mon=&end_entry_year=&min_score=&sort=NDATE&data_type=PLAINTEXT&aut_syn=YES&ttl_syn=YES&txt_syn=YES&aut_wt=1.0&obj_wt=1.0&ttl_wt=0.3&txt_wt=3.0&aut_wgt=YES&obj_wgt=YES&ttl_wgt=YES&txt_wgt=YES&ttl_sco=YES&txt_sco=YES&version=1"
 
 import sys, os
+import time
 import urllib2
 
 names_file = open(sys.argv[1])
@@ -40,6 +41,7 @@ for line in names_file:
 	query = start_url + query_name + end_url.replace('10', str(number_abstracts))
 
 	response = urllib2.urlopen(query)
+	time.sleep(10)
 	html = response.read()
 
 	participant_file = open(abstract_directory+'/'+\
