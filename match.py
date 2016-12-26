@@ -17,15 +17,16 @@ number_abstracts = 4
 if len(sys.argv) > 3:
 	number_abstracts = int(sys.argv[3])
 
-
-i = 0
+author_num = 0
 for line in names_file:
 	#Only names
 	if line[0]==',': continue
 	if len(line) < 4: continue
 
-	cut_point = 0
+	print "Author", author_num
 
+
+	cut_point = 0
 	#Find last space
 	for x in reversed(range(len(line))):
 		if line[x] == ' ':
@@ -51,7 +52,4 @@ for line in names_file:
 		abstract_file.write("\n")
 		j += 1
 		if j > number_abstracts: break
-	i+=1
-	if i > 4:
-		break
-	print i
+	author_num+=1
