@@ -34,17 +34,24 @@ for line in names_file:
 	first_name = line[:x]
 	last_name = line[x+1:]
 	last_name = ''.join([char for char in last_name if char.isalpha()])
-
 	papers = ads.SearchQuery(
-		author=last_name+", "+first_name)
+		author=last_name+", "+first_name,
+		sort='date',
+		fl=['abstract'])
+
+	abstract_file = open(abstract_directory+"/"+\
+		last_name+"_"+first_name+".txt",'w')
+	j = 0
 	for paper in papers:
-		print paper.abstract
-	
-	#participant_file = open(abstract_directory+'/'+\
-		#first_name+'_'+last_name+'.txt', 'w')
-
-	#participant_file.write(html)
-
+		abstract_file.write("Abstract "+str(j)+"\n")
+		try:
+			abstract_file.write(paper.abstract.encode('utf-8'))
+		except AttributeError:
+			pass
+		abstract_file.write("\n")
+		j += 1
+		if j > number_abstracts: break
 	i+=1
 	if i > 4:
 		break
+	print i
