@@ -9,8 +9,13 @@ Works by:
 - [ads](https://github.com/andycasey/ads)
     - Note: install from source, not from pip. The pip version gave me issues for lazy-loading attributes (similar to [here](https://github.com/andycasey/ads/issues/77)).
     - You also need the access token for the ADS API. Good instructions/examples are on the ads repo.
-    
+
+
+
 # Usage
+`0`. Put your ADS access token into the environment variable `ADS_DEV_KEY`, for example:
+
+`export ADS_DEV_KEY=JFJJ38fJ02VZ09JFD...`
 
 `1`. Put all names in a text file, say `names.txt`, one name per line, first name before last, space separated. For example:
 ```
