@@ -15,28 +15,32 @@ if len(sys.argv) > 2:
 if not os.path.exists(abstract_directory):
 	os.makedirs(abstract_directory)
 
+number_abstracts = 4
+if len(sys.argv) > 3:
+	number_abstracts = int(sys.argv[3])
+
+
 i = 0
 for line in names_file:
 	#Only names
-	if line[0]!=',': continue
+	if line[0]==',': continue
 	if len(line) < 4: continue
 
-	name = line[1:]
 	cut_point = 0
 
 	#Find last space
-	for x in reversed(range(len(name))):
+	for x in reversed(range(len(line))):
 		if line[x] == ' ':
 			cut_point = x
 			break
-	first_name = name[:x-1]
-	last_name = name[x:]
+	first_name = line[:x]
+	last_name = line[x+1:]
 	last_name = ''.join([char for char in last_name if char.isalpha()])
 
 	print first_name+'_'+last_name+'.txt'
 
 	query_name = first_name+'%2C+'+last_name
-	query = start_url + query_name + end_url
+	query = start_url + query_name + end_url.replace('10', str(number_abstracts))
 
 	print query
 	response = urllib2.urlopen(query)
