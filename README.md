@@ -2,7 +2,7 @@
 Sorts a list of names by research interest. Good for conferences.
 
 Works by:
-- Downloading N recent abstracts each author in a list of names
+- Downloading N recent abstracts from each author in a list of names
 - Searching the abstracts for keywords/regular expressions
 
 # Required packages
