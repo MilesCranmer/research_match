@@ -1,12 +1,14 @@
 # Research match
 Sorts a list of names by research interest. Good for conferences.
 
-Works by searching N recent abstracts for keywords/regular expressions.
+Works by:
+- Downloading N recent abstracts each author in a list of names
+- Searching the abstracts for keywords/regular expressions
 
 # Required packages
 - [ads](https://github.com/andycasey/ads)
-    - Note: install from source, not from pip. The pip version gave me issues for lazy-loading attributes (see [here](https://github.com/andycasey/ads/issues/77)).
-    - You also need the access token for the ADS API. Good instructions/examples are on the linked repo.
+    - Note: install from source, not from pip. The pip version gave me issues for lazy-loading attributes (similar to [here](https://github.com/andycasey/ads/issues/77)).
+    - You also need the access token for the ADS API. Good instructions/examples are on the ads repo.
     
 # Usage
 
