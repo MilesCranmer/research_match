@@ -20,7 +20,6 @@ if len(sys.argv) > 3:
 	number_abstracts = int(sys.argv[3])
 
 
-i = 0
 for line in names_file:
 	#Only names
 	if line[0]==',': continue
@@ -37,20 +36,13 @@ for line in names_file:
 	last_name = line[x+1:]
 	last_name = ''.join([char for char in last_name if char.isalpha()])
 
-	print first_name+'_'+last_name+'.txt'
-
 	query_name = first_name+'%2C+'+last_name
 	query = start_url + query_name + end_url.replace('10', str(number_abstracts))
 
-	print query
 	response = urllib2.urlopen(query)
 	html = response.read()
 
-		
 	participant_file = open(abstract_directory+'/'+\
 		first_name+'_'+last_name+'.txt', 'w')
 
 	participant_file.write(html)
-	i+=1
-	if i >= 2:
-		break
