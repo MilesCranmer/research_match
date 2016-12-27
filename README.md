@@ -1,5 +1,5 @@
 # Research match
-Sorts a list of names by research interest. Good for conferences.
+Filters a list of names by research interest. Good for conferences.
 
 Works by:
 - Downloading N recent abstracts from each author in a list of names
