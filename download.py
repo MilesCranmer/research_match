@@ -1,7 +1,10 @@
 #!/usr/bin/python
 
 import sys, os
-import ads as ads
+import ads
+
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 names_file = open(sys.argv[1])
 
@@ -41,7 +44,7 @@ for line in names_file:
 		fl=['abstract'])
 
 	abstract_file = open(abstract_directory+"/"+\
-		last_name+"_"+first_name+".txt",'w')
+		first_name+" "+last_name+".txt",'w')
 	j = 0
 	for paper in papers:
 		abstract_file.write("Abstract "+str(j)+"\n")
