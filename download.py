@@ -2,6 +2,7 @@
 
 import sys, os
 import ads
+from nameparser import HumanName
 
 reload(sys)
 sys.setdefaultencoding('utf8')
@@ -28,31 +29,24 @@ for line in names_file:
 
 	print "Author", author_num
 
-
-	cut_point = 0
-	#Find last space
-	for x in reversed(range(len(line))):
-		if line[x] == ' ':
-			cut_point = x
-			break
-	first_name = line[:x]
-	last_name = line[x+1:]
-	last_name = ''.join([char for char in last_name if char.isalpha()])
-	papers = ads.SearchQuery(
-		author=last_name+", "+first_name,
-		sort='date',
-		fl=['abstract'])
-
+        parsed_name = HumanName(line)
+        papers = ads.SearchQuery(
+                author=parsed_name.first+", "+parsed_name.last,
+                sort='date',
+                fl=['abstract'])
 	abstract_file = open(abstract_directory+"/"+\
-		first_name+" "+last_name+".txt",'w')
+		parsed_name.first+" "+parsed_name.last+".txt",'w')
 	j = 0
-	for paper in papers:
-		abstract_file.write("Abstract "+str(j)+"\n")
-		try:
-			abstract_file.write(paper.abstract.encode('utf-8'))
-		except AttributeError:
-			pass
-		abstract_file.write("\n")
-		j += 1
-		if j > number_abstracts: break
+        try:
+            for paper in papers:
+                    abstract_file.write("Abstract "+str(j)+"\n")
+                    try:
+                            abstract_file.write(paper.abstract.encode('utf-8'))
+                    except AttributeError:
+                            pass
+                    abstract_file.write("\n")
+                    j += 1
+                    if j > number_abstracts: break
+        except ads.base.APIResponseError:
+            continue
 	author_num+=1

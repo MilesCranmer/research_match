@@ -9,7 +9,9 @@ Works by:
 - [ads](https://github.com/andycasey/ads)
     - Note: install from source, not from pip. The pip version gave me issues for lazy-loading attributes (similar to [here](https://github.com/andycasey/ads/issues/77)).
     - You also need the access token for the ADS API. Good instructions/examples are on the ads repo.
-
+- [Nameparser](http://nameparser.readthedocs.io/en/latest/)
+    - Used to parse the list of names
+    - Install with, e.g., `pip install nameparser`
 
 
 # Usage
