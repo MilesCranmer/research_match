@@ -29,9 +29,12 @@ for line in names_file:
 
 
     parsed_name = HumanName(line)
-    print "Author:", str(parsed_name)
+    name_for_ads = parsed_name.last + ', ' + parsed_name.first
+    if len(parsed_name.middle) > 0:
+        name_for_ads += ' ' + parsed_name.middle
+    print "Author:", name_for_ads
     papers = ads.SearchQuery(
-            q='author:"'+str(parsed_name)+'"',
+            q='author:"'+name_for_ads+'"',
             sort='date',
             fl=['abstract'])
     abstract_file = open(abstract_directory+"/"+\
