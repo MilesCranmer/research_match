@@ -43,3 +43,12 @@ python match.py ./abstracts GPU "(pulsar|FRB)"
 This will print out a list of people who have done research with GPUs AND (have done research with pulsars OR FRBs). 
 
 You can make up more regex combinations [here](https://regex101.com/). Don't forget to include the quotation marks on regex arguments when running `match.py`.
+
+
+## Counting Matches
+
+Run
+```bash
+./count_matches.sh abstracts
+```
+To print out a comma separated list of the number of matches for each category. This is useful for gauging how closely somebody matches the categories you specify, rather than just having >0 matches or not. You will need to modify the values inside count_matches.sh to match the categories you want to search. Read grep documentation if you are confused about what the commands mean.
