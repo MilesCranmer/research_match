@@ -1,5 +1,5 @@
 # Research match
-Filters a list of names by research interest. Good for massive conferences.
+Filters a list of names by research interest. This is helpful for finding those with similar interests at a conference, or, say, finding a PhD advisor given a list of faculty and a list of your research interests.
 
 Works by:
 - Downloading N recent abstracts from each author in a list of names
