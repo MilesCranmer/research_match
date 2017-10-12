@@ -30,24 +30,34 @@ for line in names_file:
 
     parsed_name = HumanName(line)
     name_for_ads = parsed_name.last + ', ' + parsed_name.first
-    if len(parsed_name.middle) > 0:
-        name_for_ads += ' ' + parsed_name.middle
+    if len(parsed_name.middle) > 0 and len(parsed_name.first) > 2:
+        name_for_ads = parsed_name.last + ', ' + parsed_name.first
+        name_for_ads += ' ' + parsed_name.middle # ADS bad with two initials
     print "Author:", name_for_ads
     papers = ads.SearchQuery(
-            q='author:"'+name_for_ads+'"',
+            q='author:"'+name_for_ads+'" database:astronomy property:refereed',
             sort='date',
-            fl=['abstract'])
+            rows=500,
+            fl=['abstract', 'author'])
     abstract_file = open(abstract_directory+"/"+\
-        parsed_name.first+" "+parsed_name.last+".txt",'w')
+        parsed_name.first+"_"+parsed_name.last+".txt",'w')
     j = 0
     while True:
         try:
             for paper in papers:
-                abstract_file.write("Abstract "+str(j)+"\n")
                 try:
-                    abstract_file.write(paper.abstract.encode('utf-8'))
+                    if len(paper.abstract) < 10:
+                        continue
+                except TypeError:
+                    continue
+                if len(paper.author) > 50:
+                    continue # Too many authors!
+                try:
+                    encoded = paper.abstract.encode('utf-8')
                 except AttributeError:
-                    pass
+                    continue
+                abstract_file.write("Abstract "+str(j)+"\n")
+                abstract_file.write(encoded)
                 abstract_file.write("\n")
                 j += 1
                 if j > number_abstracts:
