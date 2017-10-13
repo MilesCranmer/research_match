@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Modify "abstracts" here to be the name of your abstracts folder
 # This command removes spaces in the names and replaces them with underscores
 Z=$(for x in $1/*\ *; do mv "$x" "${x// /_}"; done 2>/dev/null)
 
