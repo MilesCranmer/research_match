@@ -19,10 +19,10 @@ Works by:
 
 `export ADS_DEV_KEY=JFJJ38fJ02VZ09JFD...`
 
-`1`. Put all names in a text file, say `names.txt`, one name per line, first name before last, space separated. For example:
+`1`. Put all names in a text file, say `names.txt`, one name per line (it doesn't matter how you write them). For example:
 ```
 Carl Sagan
-Donald Knuth
+Knuth, Donald E.
 Ada Lovelace
 ...
 ```
