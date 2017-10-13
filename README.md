@@ -30,6 +30,8 @@ Ada Lovelace
 ```bash
 python download.py names.txt ./abstracts 10
 ```
+**N.B.: if you want to look for physics papers, you must change database:astronomy to database:physics in the download.py script**
+
 `3`. Search the abstracts by keyword. You can use `match.py` to do this. The first argument is the folder of the abstracts, and the next arguments are keywords (AND). They keywords are put into a regex, so can be regex themselves. For example:
 ```bash
 python match.py ./abstracts GPU
