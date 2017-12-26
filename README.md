@@ -19,10 +19,10 @@ Works by:
 
 `export ADS_DEV_KEY=JFJJ38fJ02VZ09JFD...`
 
-`1`. Put all names in a text file, say `names.txt`, one name per line, first name before last, space separated. For example:
+`1`. Put all names in a text file, say `names.txt`, one name per line (it doesn't matter how you write them). For example:
 ```
 Carl Sagan
-Donald Knuth
+Knuth, Donald E.
 Ada Lovelace
 ...
 ```
@@ -30,6 +30,8 @@ Ada Lovelace
 ```bash
 python download.py names.txt ./abstracts 10
 ```
+**N.B.: if you want to look for physics papers, you must change database:astronomy to database:physics in the download.py script**
+
 `3`. Search the abstracts by keyword. You can use `match.py` to do this. The first argument is the folder of the abstracts, and the next arguments are keywords (AND). They keywords are put into a regex, so can be regex themselves. For example:
 ```bash
 python match.py ./abstracts GPU
@@ -43,3 +45,12 @@ python match.py ./abstracts GPU "(pulsar|FRB)"
 This will print out a list of people who have done research with GPUs AND (have done research with pulsars OR FRBs). 
 
 You can make up more regex combinations [here](https://regex101.com/). Don't forget to include the quotation marks on regex arguments when running `match.py`.
+
+
+## Counting Matches
+
+Run
+```bash
+./count_matches.sh abstracts
+```
+To print out a comma separated list of the number of matches for each category. This is useful for gauging how closely somebody matches the categories you specify, rather than just having >0 matches or not. You will need to modify the values inside count_matches.sh to match the categories you want to search. Read grep documentation if you are confused about what the commands mean.

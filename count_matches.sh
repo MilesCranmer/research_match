@@ -1,11 +1,10 @@
 #!/bin/bash
 
-# Modify "abstracts" here to be the name of your abstracts folder
 # This command removes spaces in the names and replaces them with underscores
 Z=$(for x in $1/*\ *; do mv "$x" "${x// /_}"; done 2>/dev/null)
 
 # This shows the columns of our table
-echo "name, GPU, ML, Bayesian, Monte Carlo, NLP, python, C++, dark matter, dark energy, surveys, lss, galaxy formation, statistics, pulsars, PCA"
+echo "name, GPU, ML, Bayesian, Monte Carlo, python, C++, dark matter, dark energy, surveys, lss, galaxy formation, statistics, pulsars, PCA"
 for x in $(ls -tr $1); do
     # This both searches for GPU in the $1, and prints the person's name
     grep -c -e "\<GPU\>" $1/$x | echo -n "$x, $(cat -), "
